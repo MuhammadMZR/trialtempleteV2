@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent } from "framer-motion";
 
 const steps = [
   { 
@@ -105,16 +105,13 @@ export default function ProcessRoadmap() {
     offset: ["start center", "end center"],
   });
 
-  // Track scroll position to update scrollIndex
-  useEffect(() => {
-    return scrollYProgress.onChange((v) => {
-      // Divide scroll progress into 4 parts
-      const index = Math.min(Math.floor(v * 4), 3);
-      if (index !== scrollIndex) {
-        setScrollIndex(index);
-      }
-    });
-  }, [scrollYProgress, scrollIndex]);
+  // Track scroll position using modern event hook
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const index = Math.min(Math.floor(v * 4), 3);
+    if (index !== scrollIndex) {
+      setScrollIndex(index);
+    }
+  });
 
   // Determine which card is active
   // Priority: Hover > Click > Scroll
