@@ -107,15 +107,15 @@ export default function FinalMorph() {
           </div>
         )}
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none">
           <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight drop-shadow-2xl">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight drop-shadow-2xl">
               Precision in <br/> Every Detail
             </h2>
           </motion.div>
 
           <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
-            <h2 className="text-3xl md:text-4xl font-light tracking-wide text-white max-w-3xl leading-relaxed drop-shadow-2xl">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-white max-w-3xl leading-relaxed drop-shadow-2xl">
               Transforming <span className="text-gold font-bold">complex data</span> into clear, undeniable visual facts.
             </h2>
           </motion.div>

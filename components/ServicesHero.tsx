@@ -223,7 +223,7 @@ export default function ServicesHero() {
 
         {/* Stats row */}
         <motion.div
-          className="flex items-center gap-8 justify-center"
+          className="flex flex-wrap items-center gap-4 sm:gap-8 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: premiumEase, delay: 1.0 }}

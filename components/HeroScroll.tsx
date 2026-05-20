@@ -145,10 +145,10 @@ export default function HeroScroll() {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest text-white mb-6 leading-tight max-w-6xl drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest text-white mb-4 sm:mb-6 leading-tight max-w-6xl drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
             FLAT-RATE TRIAL <br className="hidden md:block" /> DEMONSTRATIVES
           </h1>
-          <p className="text-xl md:text-2xl text-muted max-w-2xl mb-12 tracking-wide font-light border-l-2 border-gold/50 pl-6 text-left mx-auto">
+          <p className="text-base sm:text-xl md:text-2xl text-muted max-w-2xl mb-8 sm:mb-12 tracking-wide font-light border-l-2 border-gold/50 pl-4 sm:pl-6 text-left mx-auto">
             Impactful graphics built for mediation & trial. We simplify complex evidence so your jury understands the facts instantly.
           </p>
           

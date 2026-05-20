@@ -17,13 +17,13 @@ export default function Home() {
       <HeroScroll />
       
       {/* Intro Statement */}
-      <section className="bg-[#051A3D] py-32 px-6">
+      <section className="bg-[#051A3D] py-16 sm:py-32 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-widest text-white uppercase mb-8 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-widest text-white uppercase mb-6 sm:mb-8 leading-tight">
             Complex evidence deserves <br className="hidden md:block"/> more than decoration. <br/>
             <span className="text-gold">It deserves visual strategy.</span>
           </h2>
-          <p className="text-xl md:text-2xl text-muted font-light leading-relaxed">
+          <p className="text-base sm:text-xl md:text-2xl text-muted font-light leading-relaxed">
             Trial Template creates clear, persuasive demonstratives that help legal teams communicate medical facts, timelines, injuries, and case arguments with confidence.
           </p>
         </div>
@@ -46,7 +46,7 @@ export default function Home() {
       <FinalMorph />
 
       {/* CTA Section */}
-      <section className="bg-[#051A3D] py-24 md:py-32 px-6">
+      <section className="bg-[#051A3D] py-16 sm:py-24 md:py-32 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="relative w-full rounded-[2rem] overflow-hidden border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.8)] group">
             
@@ -62,17 +62,17 @@ export default function Home() {
             </div>
 
             {/* Content Container */}
-            <div className="relative z-10 p-12 md:p-24 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="relative z-10 p-8 sm:p-12 md:p-24 flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-12">
               
               {/* Text Side */}
               <div className="w-full md:w-[60%] text-left">
                 <span className="text-gold font-mono tracking-widest uppercase text-xs md:text-sm mb-6 block opacity-80">
                   [ READY TO PROCEED ]
                 </span>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest text-white uppercase mb-8 leading-tight drop-shadow-2xl">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest text-white uppercase mb-6 sm:mb-8 leading-tight drop-shadow-2xl">
                   Ready to Make <br className="hidden md:block"/> Your Case Clear?
                 </h2>
-                <p className="text-lg md:text-xl text-muted font-light mb-10 max-w-xl border-l-2 border-gold/50 pl-6 leading-relaxed">
+                <p className="text-base sm:text-lg md:text-xl text-muted font-light mb-8 sm:mb-10 max-w-xl border-l-2 border-gold/50 pl-4 sm:pl-6 leading-relaxed">
                   Schedule a demo and see how flat-rate trial demonstratives can help turn complex evidence into persuasive visual communication.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6">

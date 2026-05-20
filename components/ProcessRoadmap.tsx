@@ -56,7 +56,7 @@ function RoadmapCard({
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       onClick={onClick}
-      className="relative flex flex-col justify-end overflow-hidden rounded-[2rem] bg-[#051A3D] border border-white/5 transition-colors group cursor-pointer h-[500px] md:h-[60vh] min-w-[80px]"
+      className="relative flex flex-col justify-end overflow-hidden rounded-xl sm:rounded-[2rem] bg-[#051A3D] border border-white/5 transition-colors group cursor-pointer h-[280px] sm:h-[400px] md:h-[500px] lg:h-[60vh] min-w-[80px]"
     >
       {/* Background Graphic/Glow */}
       <div className={`absolute inset-0 bg-gradient-to-t from-gold/20 to-transparent transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
@@ -79,7 +79,7 @@ function RoadmapCard({
 
       <div className="relative z-20 p-6 md:p-10 h-full flex flex-col justify-end pointer-events-none min-w-0">
         <div className="w-full max-w-[400px]">
-          <h3 className={`text-xl md:text-3xl font-bold text-white tracking-wide transition-all duration-500 ${isActive ? 'mb-4' : 'mb-0'}`}>
+          <h3 className={`text-lg sm:text-xl md:text-3xl font-bold text-white tracking-wide transition-all duration-500 ${isActive ? 'mb-3 sm:mb-4' : 'mb-0'}`}>
             {step.title}
           </h3>
           
@@ -125,11 +125,11 @@ export default function ProcessRoadmap() {
 
   return (
     <section ref={containerRef} className="relative py-24 md:py-32 bg-[#051A3D] overflow-hidden min-h-[150vh]">
-      <div className="sticky top-1/2 -translate-y-1/2 max-w-7xl mx-auto px-4 md:px-12 w-full">
+      <div className="md:sticky md:top-1/2 md:-translate-y-1/2 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full">
         
         <div className="mb-12 md:mb-20 text-center">
           <span className="text-gold font-mono text-sm tracking-widest uppercase mb-4 block">Process</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl mx-auto leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl mx-auto leading-tight">
             A Simple System for High-Stakes Visuals
           </h2>
         </div>

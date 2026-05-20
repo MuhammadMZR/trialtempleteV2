@@ -61,8 +61,8 @@ function ServiceCard({
         justifyContent: "center",
       }}
     >
-      <div className="w-full max-w-6xl mx-auto px-6 h-auto md:h-[65vh] relative drop-shadow-2xl">
-        <div className="w-full h-full bg-[#051A3D] border border-white/5 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative flex flex-col md:flex-row items-stretch">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 h-auto md:h-[65vh] relative drop-shadow-2xl">
+        <div className="w-full h-full bg-[#051A3D] border border-white/5 rounded-xl sm:rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative flex flex-col md:flex-row items-stretch">
           
           {/* Darkening overlay for depth effect */}
           {index !== total - 1 && (
@@ -73,20 +73,20 @@ function ServiceCard({
           )}
 
           {/* Left Side Text Content */}
-          <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center relative z-20 bg-[#051A3D]">
+          <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-16 flex flex-col justify-center relative z-20 bg-[#051A3D]">
             <span className="text-gold font-mono tracking-widest mb-4 text-lg md:text-xl opacity-80 block">
               {service.num}
             </span>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide mb-6 leading-tight">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-wide mb-4 sm:mb-6 leading-tight">
               {service.title}
             </h3>
-            <p className="text-base md:text-lg text-muted leading-relaxed border-l-2 border-gold/50 pl-6 max-w-lg">
+            <p className="text-sm sm:text-base md:text-lg text-muted leading-relaxed border-l-2 border-gold/50 pl-4 sm:pl-6 max-w-lg">
               {service.desc}
             </p>
           </div>
 
           {/* Right Side Image */}
-          <div className="w-full md:w-1/2 h-[250px] md:h-full relative z-10 flex-shrink-0">
+          <div className="w-full md:w-1/2 h-[200px] sm:h-[250px] md:h-full relative z-10 flex-shrink-0">
             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#051A3D] via-[#051A3D]/30 to-transparent z-10" />
             <img src={service.img} alt={service.title} className="w-full h-full object-cover" />
           </div>
@@ -111,7 +111,7 @@ export default function ServicesPreview() {
         
         {/* Title */}
         <div className="w-full z-40 flex flex-col items-center justify-center pointer-events-none px-6 mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-widest text-white uppercase text-center drop-shadow-2xl">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-widest text-white uppercase text-center drop-shadow-2xl">
             Visuals Built for <br className="hidden md:block" /> Legal Impact
           </h2>
         </div>

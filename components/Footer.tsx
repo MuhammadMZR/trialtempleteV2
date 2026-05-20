@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#051A3D] text-white border-t border-white/5 py-16 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-[#051A3D] text-white border-t border-white/5 py-10 md:py-16 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
         <div className="col-span-1 md:col-span-2">
           <Link href="/" className="flex items-center gap-3 mb-6 group">
             <Image src="/logo.png" alt="Trial Template Logo" width={56} height={56} className="group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_10px_rgba(210,155,45,0.3)]" />

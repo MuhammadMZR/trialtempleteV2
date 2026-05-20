@@ -17,7 +17,7 @@ export default function WhoWeAre() {
   const rightCardY = useTransform(scrollYProgress, [0, 1], [150, -150]);
 
   return (
-    <section className="bg-[#051A3D] py-32 md:py-56 px-6 overflow-hidden">
+    <section className="bg-[#051A3D] py-16 sm:py-32 md:py-56 px-4 sm:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div ref={containerRef} className="flex flex-col md:flex-row items-center gap-12 relative">
           
@@ -45,7 +45,7 @@ export default function WhoWeAre() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: premiumEase, delay: 0.2 }}
             style={{ y: rightCardY }}
-            className="w-full md:w-[45%] md:-ml-[10%] bg-[#051A3D] p-10 md:p-14 border border-white/10 rounded-sm shadow-2xl z-20"
+            className="w-full md:w-[45%] md:-ml-[10%] bg-[#051A3D] p-6 sm:p-10 md:p-14 border border-white/10 rounded-sm shadow-2xl z-20"
           >
             <div className="mb-8">
               {/* Headshot placeholder */}
@@ -56,7 +56,7 @@ export default function WhoWeAre() {
               <span className="text-gold text-xs font-bold tracking-widest uppercase mb-4 block">
                 Legal Visual Strategy
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-wide text-white mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-white mb-4 sm:mb-6 leading-tight">
                 Built for attorneys who need clarity fast.
               </h2>
               <p className="text-muted leading-relaxed">

@@ -192,7 +192,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: premiumEase, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-widest text-white uppercase mb-8 leading-tight"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-widest text-white uppercase mb-6 sm:mb-8 leading-tight"
           >
             Our Case <span className="text-gold">Portfolio</span>
           </motion.h1>
@@ -201,7 +201,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: premiumEase, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed border-l-2 border-gold/40 pl-6 text-left"
+            className="text-base sm:text-lg md:text-xl text-muted font-light max-w-2xl mx-auto leading-relaxed border-l-2 border-gold/40 pl-4 sm:pl-6 text-left"
           >
             Premium medical, mechanical, and industrial trajectory case studies. Designed with exact anatomical and physics accuracy to drive absolute juror persuasion.
           </motion.p>

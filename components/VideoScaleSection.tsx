@@ -14,7 +14,7 @@ const miniProjects = [
 
 function MiniProjectCard({ img }: { img: string }) {
   return (
-    <div className="w-[320px] h-[180px] rounded-2xl overflow-hidden border border-white/10 shrink-0 shadow-2xl relative group">
+    <div className="w-[220px] h-[124px] sm:w-[280px] sm:h-[158px] md:w-[320px] md:h-[180px] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 shrink-0 shadow-2xl relative group">
       <img src={img} alt="" className="w-full h-full object-cover brightness-90 group-hover:brightness-110 transition-all duration-500" />
       {/* Mini Play Icon Overlay */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -107,7 +107,7 @@ export default function VideoScaleSection() {
           style={{ opacity: textOpacity, scale: textScale, x: textX }}
           className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
         >
-          <h2 className="text-6xl md:text-[10vw] lg:text-[12vw] font-sans text-white whitespace-nowrap tracking-tighter uppercase font-black">
+          <h2 className="text-4xl sm:text-6xl md:text-[10vw] lg:text-[12vw] font-sans text-white whitespace-nowrap tracking-tighter uppercase font-black">
             Flat Rate Trial Graphics
           </h2>
         </motion.div>

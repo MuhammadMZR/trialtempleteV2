@@ -35,7 +35,7 @@ export default function OurProjects() {
       <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <span className="text-gold font-mono text-sm tracking-widest uppercase mb-4 block">Our Portfolio</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest text-white uppercase">Featured Projects</h2>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest text-white uppercase">Featured Projects</h2>
         </div>
         <button className="flex items-center gap-2 text-muted hover:text-gold transition-colors pb-2">
           <span className="font-mono text-sm uppercase tracking-widest">View All Cases</span>
@@ -56,10 +56,10 @@ export default function OurProjects() {
           {duplicatedProjects.map((project, i) => (
             <div 
               key={i} 
-              className="w-[280px] md:w-[380px] flex-shrink-0 group cursor-pointer"
+              className="w-[220px] sm:w-[280px] md:w-[380px] flex-shrink-0 group cursor-pointer"
             >
               {/* Image Container (Vertical card aspect ratio) */}
-              <div className="w-full aspect-[3/4] rounded-[2rem] overflow-hidden mb-8 relative shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10">
+              <div className="w-full aspect-[3/4] rounded-xl sm:rounded-[2rem] overflow-hidden mb-4 sm:mb-8 relative shadow-[0_0_30px_rgba(0,0,0,0.5)] border border-white/10">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#051A3D]/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500 z-10" />
                 <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay" />
                 
@@ -81,7 +81,7 @@ export default function OurProjects() {
               <span className="text-gold font-mono text-[10px] md:text-xs tracking-widest uppercase mb-3 block opacity-80">
                 {project.category}
               </span>
-              <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide group-hover:text-gold transition-colors leading-snug">
+              <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white tracking-wide group-hover:text-gold transition-colors leading-snug">
                 {project.title}
               </h3>
             </div>

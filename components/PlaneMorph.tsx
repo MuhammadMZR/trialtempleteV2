@@ -115,21 +115,21 @@ export default function PlaneMorph() {
           </div>
         )}
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none">
           <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
-            <h2 className="text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
               Medical Visuals <br/> Built for Trial
             </h2>
           </motion.div>
 
           <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
               Anatomy. Injury.<br/> Causation. Procedure.
             </h2>
           </motion.div>
 
           <motion.div style={{ opacity: phase3Opacity, y: phase3Y }} className="absolute">
-            <h2 className="text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
               Every frame is designed to make complex evidence easier to understand.
             </h2>
           </motion.div>

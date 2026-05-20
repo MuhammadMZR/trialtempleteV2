@@ -22,7 +22,7 @@ export default function TestimonialVideoSection() {
   ];
 
   return (
-    <section className="bg-[#051A3D] py-32 px-6 relative overflow-hidden">
+    <section className="bg-[#051A3D] py-16 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         
         <motion.div 
@@ -32,15 +32,15 @@ export default function TestimonialVideoSection() {
           transition={{ duration: 1, ease: premiumEase }}
           className="mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-widest text-white uppercase mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase mb-4 sm:mb-6 leading-tight">
             Trusted Visuals. <br/> Clearer Arguments.
           </h2>
-          <p className="text-xl text-muted max-w-2xl mx-auto font-light">
+          <p className="text-base sm:text-xl text-muted max-w-2xl mx-auto font-light">
             Hear from professionals who use visual storytelling to bring clarity to complex cases.
           </p>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-20">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-20">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -62,13 +62,13 @@ export default function TestimonialVideoSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#051A3D] via-transparent to-transparent pointer-events-none" />
                 
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="w-20 h-20 bg-gold/80 hover:bg-gold backdrop-blur-md rounded-full flex items-center justify-center transition-transform group-hover:scale-110 shadow-[0_0_30px_rgba(210,155,45,0.3)]">
-                    <Play className="w-8 h-8 text-black ml-1 group-hover:scale-95 transition-transform" fill="currentColor" />
+                  <button className="w-14 h-14 sm:w-20 sm:h-20 bg-gold/80 hover:bg-gold backdrop-blur-md rounded-full flex items-center justify-center transition-transform active:scale-110 shadow-[0_0_30px_rgba(210,155,45,0.3)]">
+                    <Play className="w-6 h-6 sm:w-8 sm:h-8 text-black ml-1" fill="currentColor" />
                   </button>
                 </div>
                 
-                <div className="absolute bottom-0 left-0 w-full p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="text-2xl font-bold text-white tracking-wide mb-1">{t.name}</h3>
+                <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide mb-1">{t.name}</h3>
                   <p className="text-gold text-sm tracking-widest uppercase">{t.title}</p>
                 </div>
               </div>

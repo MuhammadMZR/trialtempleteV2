@@ -86,10 +86,10 @@ function StackCard({
         justifyContent: "center",
       }}
     >
-      <div className="w-full max-w-[90rem] mx-auto px-6 md:px-12 py-12 h-auto md:h-[85vh] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative drop-shadow-2xl bg-[#061e45] border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+      <div className="w-full max-w-[90rem] mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12 h-auto md:h-[85vh] flex flex-col md:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-24 relative drop-shadow-2xl bg-[#061e45] border border-white/10 rounded-xl sm:rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
         
         {/* Left Side: Large Portrait Media */}
-        <div className="w-full md:w-[45%] h-[400px] md:h-full bg-[#051A3D] rounded-2xl overflow-hidden shadow-2xl relative border border-white/10 z-10 flex-shrink-0">
+        <div className="w-full md:w-[45%] h-[280px] sm:h-[350px] md:h-full bg-[#051A3D] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl relative border border-white/10 z-10 flex-shrink-0">
           <video 
             src={testimonial.videoSrc}
             poster={testimonial.poster}
@@ -108,23 +108,23 @@ function StackCard({
           
           {/* Top part: Centered Square Image with Text Overlap */}
           <div className="flex-1 flex items-center justify-center relative w-full mt-8 md:mt-0">
-            <div className="w-56 h-56 md:w-80 md:h-80 rounded-2xl overflow-hidden relative shadow-[0_0_40px_rgba(0,0,0,0.5)] opacity-100 border border-white/5">
+            <div className="w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 rounded-xl sm:rounded-2xl overflow-hidden relative shadow-[0_0_40px_rgba(0,0,0,0.5)] opacity-100 border border-white/5">
               <div className="absolute inset-0 bg-gradient-to-br from-[#051A3D]/30 to-transparent z-10" />
               <img src={testimonial.poster} alt="" className="w-full h-full object-cover" />
             </div>
             
             {/* The overlapping text */}
-            <h2 className="absolute text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] z-20 text-center w-[120%] leading-tight pointer-events-none">
+            <h2 className="absolute text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.9)] z-20 text-center w-full md:w-[120%] leading-tight pointer-events-none">
               {testimonial.author}
             </h2>
           </div>
 
           {/* Bottom part: Label and Text */}
           <div className="mt-12 md:mt-auto flex flex-col items-start justify-end w-full">
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-4 leading-snug max-w-md">
+            <h3 className="text-white font-bold text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 leading-snug max-w-md">
               {testimonial.heading}
             </h3>
-            <p className="text-muted text-sm md:text-base leading-relaxed max-w-md border-l border-gold/50 pl-4">
+            <p className="text-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-md border-l border-gold/50 pl-3 sm:pl-4">
               {testimonial.text}
             </p>
           </div>
