@@ -86,7 +86,7 @@ function StackCard({
         justifyContent: "center",
       }}
     >
-      <div className="w-full max-w-[90rem] mx-auto px-6 md:px-12 py-12 h-auto md:h-[85vh] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative drop-shadow-2xl bg-[#080808] border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+      <div className="w-full max-w-[90rem] mx-auto px-6 md:px-12 py-12 h-auto md:h-[85vh] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative drop-shadow-2xl bg-[#061e45] border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
         
         {/* Left Side: Large Portrait Media */}
         <div className="w-full md:w-[45%] h-[400px] md:h-full bg-[#051A3D] rounded-2xl overflow-hidden shadow-2xl relative border border-white/10 z-10 flex-shrink-0">

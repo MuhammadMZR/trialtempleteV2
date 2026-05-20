@@ -15,9 +15,9 @@ export default function Header() {
       <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
         <Link href="/" className="hover:text-gold transition-colors">Home</Link>
         <Link href="/services" className="hover:text-gold transition-colors">Services</Link>
-        <Link href="/projects" className="hover:text-gold transition-colors">Projects</Link>
+        <Link href="/portfolio" className="hover:text-gold transition-colors">Portfolio</Link>
+        <Link href="/articles" className="hover:text-gold transition-colors">Articles</Link>
         <Link href="/testimonials" className="hover:text-gold transition-colors">Testimonials</Link>
-        <Link href="/about" className="hover:text-gold transition-colors">About</Link>
         <Link href="/contact" className="hover:text-gold transition-colors">Contact</Link>
       </nav>
 

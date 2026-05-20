@@ -31,7 +31,7 @@ export default function OurProjects() {
   const duplicatedProjects = [...projects, ...projects, ...projects];
 
   return (
-    <section className="bg-[#051A3D] py-32 overflow-hidden border-t border-white/5 relative">
+    <section className="bg-[#051A3D] pt-0 pb-16 overflow-hidden border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <span className="text-gold font-mono text-sm tracking-widest uppercase mb-4 block">Our Portfolio</span>

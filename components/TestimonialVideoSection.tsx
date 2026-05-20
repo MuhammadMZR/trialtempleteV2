@@ -22,8 +22,7 @@ export default function TestimonialVideoSection() {
   ];
 
   return (
-    <section className="bg-burgundy py-32 px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#051A3D]/60" />
+    <section className="bg-[#051A3D] py-32 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         
         <motion.div 
