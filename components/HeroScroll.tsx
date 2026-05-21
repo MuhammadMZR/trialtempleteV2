@@ -72,6 +72,15 @@ export default function HeroScroll() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
+    if (isMobile) {
+      // Draw a highly fully-revealed frame statically on mobile
+      drawFrame(40);
+      return () => {
+        window.removeEventListener("resize", resizeCanvas);
+      };
+    }
+
     // Subscribe to scroll updates
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const frameIndex = Math.min(
@@ -93,8 +102,8 @@ export default function HeroScroll() {
   }, [loaded, images, scrollYProgress]);
 
   return (
-    <section ref={sectionRef} className="relative h-[400vh] bg-[#051A3D]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <section ref={sectionRef} className="relative h-screen md:h-[400vh] bg-[#051A3D]">
+      <div className="relative md:sticky md:top-0 h-screen w-full overflow-hidden">
         {/* Canvas Background */}
         <canvas
           ref={canvasRef}

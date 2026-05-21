@@ -31,9 +31,11 @@ function MiniProjectCard({ img }: { img: string }) {
 export default function VideoScaleSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -55,16 +57,22 @@ export default function VideoScaleSection() {
   const scrollOffset1 = useTransform(scrollYProgress, [0, 1], [0, 250]);
   const scrollOffset2 = useTransform(scrollYProgress, [0, 1], [0, -250]);
 
-  if (!mounted) return <section ref={containerRef} className="h-[400vh] bg-[#051A3D]" />;
+  if (!mounted) return <section ref={containerRef} className="h-screen md:h-[400vh] bg-[#051A3D]" />;
+
+  const wVal = isMobile ? "90vw" : videoWidth;
+  const hVal = isMobile ? "50vh" : videoHeight;
+  const rVal = isMobile ? "1.5rem" : videoRadius;
+  const xVal1 = isMobile ? 0 : scrollOffset1;
+  const xVal2 = isMobile ? 0 : scrollOffset2;
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-[#051A3D]" suppressHydrationWarning>
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative h-screen md:h-[400vh] bg-[#051A3D]" suppressHydrationWarning>
+      <div className="relative md:sticky md:top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         
         {/* Top Infinite Strip - Increased prominence (opacity 80) */}
         <div className="absolute top-[8vh] left-0 w-full overflow-hidden z-0 opacity-80">
           <motion.div 
-            style={{ x: scrollOffset1 }}
+            style={{ x: xVal1 }}
             className="flex gap-6 w-max"
           >
             <motion.div 
@@ -82,7 +90,7 @@ export default function VideoScaleSection() {
         {/* Bottom Infinite Strip - Increased prominence (opacity 80) */}
         <div className="absolute bottom-[8vh] left-0 w-full overflow-hidden z-0 opacity-80">
           <motion.div 
-            style={{ x: scrollOffset2 }}
+            style={{ x: xVal2 }}
             className="flex gap-6 w-max"
           >
             <motion.div 
@@ -104,7 +112,7 @@ export default function VideoScaleSection() {
 
         {/* Large Text Behind Video */}
         <motion.div 
-          style={{ opacity: textOpacity, scale: textScale, x: textX }}
+          style={{ opacity: isMobile ? 0.05 : textOpacity, scale: isMobile ? 1 : textScale, x: isMobile ? 0 : textX }}
           className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"
         >
           <h2 className="text-4xl sm:text-6xl md:text-[10vw] lg:text-[12vw] font-sans text-white whitespace-nowrap tracking-tighter uppercase font-black">
@@ -115,9 +123,9 @@ export default function VideoScaleSection() {
         {/* Video Frame */}
         <motion.div
           style={{ 
-            width: videoWidth, 
-            height: videoHeight,
-            borderRadius: videoRadius
+            width: wVal, 
+            height: hVal,
+            borderRadius: rVal
           }}
           className="relative bg-[#051A3D] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.9)] z-20 flex items-center justify-center origin-center border border-white/15"
         >

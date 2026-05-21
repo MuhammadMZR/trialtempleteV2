@@ -99,6 +99,11 @@ export default function ProcessRoadmap() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -107,6 +112,7 @@ export default function ProcessRoadmap() {
 
   // Track scroll position using modern event hook
   useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (isMobile) return;
     const index = Math.min(Math.floor(v * 4), 3);
     if (index !== scrollIndex) {
       setScrollIndex(index);
@@ -118,14 +124,15 @@ export default function ProcessRoadmap() {
   const getActiveIndex = () => {
     if (hoveredIndex !== null) return hoveredIndex;
     if (clickedIndex !== null) return clickedIndex;
+    if (isMobile) return 0;
     return scrollIndex;
   };
 
   const activeIndex = getActiveIndex();
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-32 bg-[#051A3D] overflow-hidden min-h-[150vh]">
-      <div className="md:sticky md:top-1/2 md:-translate-y-1/2 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full">
+    <section ref={containerRef} className={`relative py-24 md:py-32 bg-[#051A3D] overflow-hidden ${isMobile ? "min-h-0 h-auto" : "min-h-[150vh]"}`}>
+      <div className={`${isMobile ? "relative" : "md:sticky md:top-1/2 md:-translate-y-1/2"} max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full`}>
         
         <div className="mb-12 md:mb-20 text-center">
           <span className="text-gold font-mono text-sm tracking-widest uppercase mb-4 block">Process</span>
