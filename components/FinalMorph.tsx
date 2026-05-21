@@ -1,10 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
-export default function FinalMorph() {
+function FinalMorphMobile() {
+  return (
+    <section className="relative bg-[#051A3D] h-screen">
+      <div className="relative h-screen w-full overflow-hidden">
+        {/* Static Background Image (Fully revealed morph frame) */}
+        <img
+          src="/sequence-3/0060.jpg"
+          alt="Precision Visualization"
+          className="absolute inset-0 h-full w-full object-cover opacity-60 filter brightness-[0.7]"
+        />
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-[#051A3D] via-transparent to-[#051A3D] pointer-events-none" />
+        <div className="absolute inset-0 bg-[#051A3D]/40 pointer-events-none" />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-15">
+          <div className="flex flex-col gap-6">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-widest text-white uppercase max-w-xl leading-tight">
+              Precision in <br/> Every Detail
+            </h2>
+            <p className="text-base sm:text-lg font-light tracking-wide text-white max-w-md leading-relaxed mx-auto">
+              Transforming <span className="text-gold font-bold">complex data</span> into clear, undeniable visual facts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalMorphDesktop() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -123,4 +152,28 @@ export default function FinalMorph() {
       </div>
     </section>
   );
+}
+
+export default function FinalMorph() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="relative bg-[#051A3D] h-screen">
+        <div className="absolute inset-0 bg-[#051A3D]" />
+      </section>
+    );
+  }
+
+  if (isMobile) {
+    return <FinalMorphMobile />;
+  }
+
+  return <FinalMorphDesktop />;
 }

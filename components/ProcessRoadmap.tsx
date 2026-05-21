@@ -96,12 +96,16 @@ function RoadmapCard({
 
 export default function ProcessRoadmap() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const [scrollIndex, setScrollIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
 
   useEffect(() => {
+    setMounted(true);
     setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
   }, []);
 
@@ -119,6 +123,17 @@ export default function ProcessRoadmap() {
     }
   });
 
+  const handleMobileScroll = () => {
+    if (!sliderRef.current) return;
+    const scrollLeft = sliderRef.current.scrollLeft;
+    const width = sliderRef.current.clientWidth;
+    // Calculate current slide index based on scroll position
+    const newIndex = Math.round(scrollLeft / (width || 1));
+    if (newIndex !== mobileActiveIndex && newIndex >= 0 && newIndex < steps.length) {
+      setMobileActiveIndex(newIndex);
+    }
+  };
+
   // Determine which card is active
   // Priority: Hover > Click > Scroll
   const getActiveIndex = () => {
@@ -130,8 +145,26 @@ export default function ProcessRoadmap() {
 
   const activeIndex = getActiveIndex();
 
+  if (!mounted) {
+    return (
+      <section ref={containerRef} className="relative py-24 bg-[#051A3D] min-h-[50vh]">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <span className="text-gold font-mono text-sm tracking-widest uppercase mb-4 block">Process</span>
+          <h2 className="text-2xl font-bold tracking-widest text-white uppercase max-w-4xl mx-auto">
+            A Simple System for High-Stakes Visuals
+          </h2>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section ref={containerRef} className={`relative py-24 md:py-32 bg-[#051A3D] overflow-hidden ${isMobile ? "min-h-0 h-auto" : "min-h-[150vh]"}`}>
+    <section 
+      ref={containerRef} 
+      className={`relative py-24 md:py-32 bg-[#051A3D] overflow-hidden ${
+        isMobile ? "min-h-0 h-auto" : "min-h-[150vh]"
+      }`}
+    >
       <div className={`${isMobile ? "relative" : "md:sticky md:top-1/2 md:-translate-y-1/2"} max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full`}>
         
         <div className="mb-12 md:mb-20 text-center">
@@ -141,19 +174,92 @@ export default function ProcessRoadmap() {
           </h2>
         </div>
         
-        <div className="w-full flex flex-col md:flex-row gap-4 md:gap-6">
-          {steps.map((step, i) => (
-            <RoadmapCard 
-              key={i} 
-              index={i}
-              step={step} 
-              isActive={activeIndex === i}
-              onHover={() => setHoveredIndex(i)}
-              onLeave={() => setHoveredIndex(null)}
-              onClick={() => setClickedIndex(clickedIndex === i ? null : i)}
-            />
-          ))}
-        </div>
+        {isMobile ? (
+          <div className="w-full flex flex-col">
+            {/* Scrollable Container with scroll snap */}
+            <div 
+              ref={sliderRef}
+              onScroll={handleMobileScroll}
+              className="w-full flex flex-row overflow-x-auto snap-x snap-mandatory scrollbar-none gap-6 pb-2 px-1 cursor-grab active:cursor-grabbing"
+              style={{
+                msOverflowStyle: "none",
+                scrollbarWidth: "none",
+                WebkitOverflowScrolling: "touch"
+              }}
+            >
+              {steps.map((step, i) => (
+                <div
+                  key={i}
+                  className="w-[85vw] max-w-[340px] shrink-0 snap-center relative flex flex-col justify-end overflow-hidden rounded-2xl bg-[#051A3D] border border-white/10 h-[380px] shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                >
+                  {/* Background image */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src={step.image} 
+                      alt="" 
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 filter brightness-[0.6]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#051A3D] via-[#051A3D]/40 to-transparent" />
+                  </div>
+
+                  {/* Number Badge */}
+                  <div className="absolute top-6 left-6 z-20">
+                    <span className="w-10 h-10 border border-gold/50 bg-[#051A3D] text-gold rounded-full flex items-center justify-center font-bold text-sm shadow-[0_0_15px_rgba(210,155,45,0.3)]">
+                      {step.num}
+                    </span>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="relative z-20 p-6 flex flex-col justify-end pointer-events-none min-w-0">
+                    <h3 className="text-xl font-bold text-white tracking-wide mb-3 leading-snug">
+                      {step.title}
+                    </h3>
+                    <p className="text-white/70 text-xs leading-relaxed border-l-2 border-gold/50 pl-3">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2 mt-8">
+              {steps.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (sliderRef.current) {
+                      const width = sliderRef.current.clientWidth;
+                      sliderRef.current.scrollTo({
+                        left: i * (width - 16), // account for margin/padding gap offsets
+                        behavior: "smooth"
+                      });
+                      setMobileActiveIndex(i);
+                    }
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    mobileActiveIndex === i ? "bg-gold w-6" : "bg-white/20 w-2"
+                  }`}
+                  aria-label={`Go to step ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="w-full flex flex-col md:flex-row gap-4 md:gap-6">
+            {steps.map((step, i) => (
+              <RoadmapCard 
+                key={i} 
+                index={i}
+                step={step} 
+                isActive={activeIndex === i}
+                onHover={() => setHoveredIndex(i)}
+                onLeave={() => setHoveredIndex(null)}
+                onClick={() => setClickedIndex(clickedIndex === i ? null : i)}
+              />
+            ))}
+          </div>
+        )}
 
       </div>
 

@@ -65,6 +65,8 @@ export default function VideoScaleSection() {
   const xVal1 = isMobile ? 0 : scrollOffset1;
   const xVal2 = isMobile ? 0 : scrollOffset2;
 
+  const displayProjects = isMobile ? miniProjects : [...miniProjects, ...miniProjects, ...miniProjects];
+
   return (
     <section ref={containerRef} className="relative h-screen md:h-[400vh] bg-[#051A3D]" suppressHydrationWarning>
       <div className="relative md:sticky md:top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -76,11 +78,11 @@ export default function VideoScaleSection() {
             className="flex gap-6 w-max"
           >
             <motion.div 
-              animate={{ x: [0, -1000] }}
-              transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+              animate={isMobile ? {} : { x: [0, -1000] }}
+              transition={isMobile ? {} : { repeat: Infinity, duration: 35, ease: "linear" }}
               className="flex gap-6"
             >
-              {[...miniProjects, ...miniProjects, ...miniProjects].map((img, i) => (
+              {displayProjects.map((img, i) => (
                 <MiniProjectCard key={i} img={img} />
               ))}
             </motion.div>
@@ -94,11 +96,11 @@ export default function VideoScaleSection() {
             className="flex gap-6 w-max"
           >
             <motion.div 
-              animate={{ x: [-1000, 0] }}
-              transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+              animate={isMobile ? {} : { x: [-1000, 0] }}
+              transition={isMobile ? {} : { repeat: Infinity, duration: 40, ease: "linear" }}
               className="flex gap-6"
             >
-              {[...miniProjects, ...miniProjects, ...miniProjects].map((img, i) => (
+              {displayProjects.map((img, i) => (
                 <MiniProjectCard key={i} img={img} />
               ))}
             </motion.div>

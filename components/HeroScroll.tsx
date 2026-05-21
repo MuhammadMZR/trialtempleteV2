@@ -1,11 +1,63 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import Button from "./Button";
 
-export default function HeroScroll() {
+function HeroScrollMobile() {
+  return (
+    <section className="relative h-screen bg-[#051A3D]">
+      <div className="relative h-screen w-full overflow-hidden">
+        {/* Static Background Image (Fully revealed high-quality frame) */}
+        <img
+          src="/sequence-1/0040.jpg"
+          alt="Trial Graphics Anatomy Visualization"
+          className="absolute inset-0 h-full w-full object-cover opacity-60 filter brightness-[0.65]"
+        />
+        
+        {/* Overlay Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#051A3D]/80 via-transparent to-[#051A3D] pointer-events-none" />
+        <div className="absolute inset-0 bg-[#051A3D]/70 pointer-events-none" />
+
+        {/* CSS Tech Grid Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
+
+        {/* Hero Content */}
+        <div 
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-20"
+        >
+          {/* Subtle top badge */}
+          <div className="mb-6 px-4 py-1 border border-gold/30 rounded-full bg-gold/5 backdrop-blur-sm inline-block">
+            <span className="text-gold text-xs font-mono tracking-widest uppercase">
+              Visual Strategy for Litigators
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-widest text-white mb-4 sm:mb-6 leading-tight max-w-6xl drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] uppercase">
+            FLAT-RATE TRIAL <br /> DEMONSTRATIVES
+          </h1>
+          <p className="text-base sm:text-lg text-muted max-w-2xl mb-8 tracking-wide font-light border-l-2 border-gold/50 pl-4 text-left mx-auto">
+            Impactful graphics built for mediation & trial. We simplify complex evidence so your jury understands the facts instantly.
+          </p>
+          
+          <div className="flex flex-col gap-4 mt-2 justify-center w-full max-w-[280px]">
+            <Button href="/services" variant="secondary">Explore Services</Button>
+            <Button href="/contact" variant="primary">Schedule a Demo</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HeroScrollDesktop() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -17,13 +69,12 @@ export default function HeroScroll() {
 
   const { images, loaded } = useImagePreloader({
     path: "/sequence-1",
-    frameCount: 120, // Adjust based on actual frame count in zip
+    frameCount: 120,
     extension: "jpg",
   });
 
   // Text Animations based on scroll
   const textOpacity = useTransform(scrollYProgress, [0, 0.15, 0.65, 1], [0, 1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.45, 0.75], [40, 0, -40]);
 
   useEffect(() => {
     if (!loaded || images.length === 0 || !canvasRef.current) return;
@@ -72,15 +123,6 @@ export default function HeroScroll() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
-    if (isMobile) {
-      // Draw a highly fully-revealed frame statically on mobile
-      drawFrame(40);
-      return () => {
-        window.removeEventListener("resize", resizeCanvas);
-      };
-    }
-
     // Subscribe to scroll updates
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const frameIndex = Math.min(
@@ -102,8 +144,8 @@ export default function HeroScroll() {
   }, [loaded, images, scrollYProgress]);
 
   return (
-    <section ref={sectionRef} className="relative h-screen md:h-[400vh] bg-[#051A3D]">
-      <div className="relative md:sticky md:top-0 h-screen w-full overflow-hidden">
+    <section ref={sectionRef} className="relative h-[400vh] bg-[#051A3D]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Canvas Background */}
         <canvas
           ref={canvasRef}
@@ -132,13 +174,13 @@ export default function HeroScroll() {
 
         {/* UI Accents */}
         <motion.div style={{ opacity: textOpacity }} className="absolute inset-0 pointer-events-none z-10">
-          <div className="absolute top-8 left-8 hidden md:block text-gold font-mono text-[10px] tracking-[0.3em] opacity-80">
+          <div className="absolute top-8 left-8 text-gold font-mono text-[10px] tracking-[0.3em] opacity-80">
             [SYSTEM.ACTIVE] // TRIAL_TEMPLATE_V1
           </div>
-          <div className="absolute top-8 right-8 hidden md:block text-white/40 font-mono text-[10px] tracking-widest text-right">
+          <div className="absolute top-8 right-8 text-white/40 font-mono text-[10px] tracking-widest text-right">
             EVIDENTIARY GRAPHICS<br/>MED_LEGAL_ENGINE
           </div>
-          <div className="absolute bottom-8 left-8 hidden md:block text-white/30 font-mono text-[10px] tracking-[0.2em]">
+          <div className="absolute bottom-8 left-8 text-white/30 font-mono text-[10px] tracking-[0.2em]">
             SCROLL TRIGGERED
           </div>
         </motion.div>
@@ -183,4 +225,28 @@ export default function HeroScroll() {
       </div>
     </section>
   );
+}
+
+export default function HeroScroll() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="relative h-screen bg-[#051A3D]">
+        <div className="absolute inset-0 bg-[#051A3D]" />
+      </section>
+    );
+  }
+
+  if (isMobile) {
+    return <HeroScrollMobile />;
+  }
+
+  return <HeroScrollDesktop />;
 }

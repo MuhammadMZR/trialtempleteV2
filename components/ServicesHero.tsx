@@ -22,7 +22,103 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <>{val}{suffix}</>;
 }
 
-export default function ServicesHero() {
+function ServicesHeroMobile() {
+  return (
+    <section className="relative w-full overflow-hidden" style={{ height: "60vh", minHeight: 480 }}>
+      {/* Static Background Image */}
+      <img
+        src="/sequence-1/0050.jpg"
+        alt="Services Background"
+        className="absolute inset-0 w-full h-full object-cover opacity-60 filter brightness-[0.7]"
+      />
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "linear-gradient(to bottom, rgba(5,26,61,0.85) 0%, rgba(5,26,61,0.3) 35%, rgba(5,26,61,0.3) 65%, rgba(5,26,61,1) 100%)"
+      }} />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%)"
+      }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(0,0,0,0.45)" }} />
+
+      {/* CSS grid overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          opacity: 0.03,
+          backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* Hero content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-20 pt-16">
+        {/* Pill badge */}
+        <div className="mb-4 inline-flex items-center gap-3">
+          <span className="relative flex h-2 w-2">
+            <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "#E5B53A" }} />
+          </span>
+          <div
+            className="px-4 py-1 rounded-full font-mono text-xs tracking-widest uppercase"
+            style={{
+              border: "1px solid rgba(229,181,58,0.3)",
+              background: "rgba(229,181,58,0.06)",
+              backdropFilter: "blur(8px)",
+              color: "#E5B53A",
+            }}
+          >
+            Flat-Rate Demonstratives
+          </div>
+        </div>
+
+        {/* Main title */}
+        <h1
+          className="font-bold tracking-widest text-white uppercase leading-tight mb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.08)] text-4xl sm:text-5xl"
+          style={{ maxWidth: 900 }}
+        >
+          OUR <span style={{
+            background: "linear-gradient(135deg, #E5B53A 0%, #fff8dc 50%, #D29B2D 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>SERVICES</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p
+          className="text-base max-w-xl mb-8 tracking-wide font-light border-l-2 pl-4 text-left mx-auto leading-relaxed"
+          style={{ color: "rgba(255,255,255,0.65)", borderColor: "rgba(229,181,58,0.45)" }}
+        >
+          Premium legal and medical graphics designed to simplify complex evidence —{" "}
+          <em style={{ color: "rgba(229,181,58,0.9)" }}>built for mediation, trial, and case strategy.</em>
+        </p>
+
+        {/* Stats row */}
+        <div className="flex flex-wrap items-center gap-4 sm:gap-8 justify-center">
+          {[
+            { value: 500, suffix: "+",   label: "Cases Supported" },
+            { value: 12,  suffix: " yrs", label: "Of Expertise" },
+            { value: 100, suffix: "%",   label: "Flat-Rate Pricing" },
+          ].map((stat, i) => (
+            <div key={i} className="flex items-center gap-4 sm:gap-6">
+              {i !== 0 && <div className="w-px h-6" style={{ background: "rgba(229,181,58,0.2)" }} />}
+              <div className="text-center">
+                <p className="text-lg font-bold text-white tracking-wide">
+                  {stat.value}{stat.suffix}
+                </p>
+                <p className="text-[8px] font-bold tracking-[0.25em] uppercase mt-0.5" style={{ color: "rgba(229,181,58,0.7)" }}>
+                  {stat.label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesHeroDesktop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef(0);
   const rafRef = useRef<number>(0);
@@ -84,15 +180,14 @@ export default function ServicesHero() {
 
   return (
     <section className="relative w-full overflow-hidden" style={{ height: "60vh", minHeight: 480 }}>
-
-      {/* ── Canvas (video-like background) ── */}
+      {/* Canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
         style={{ objectFit: "cover" }}
       />
 
-      {/* ── Loading placeholder ── */}
+      {/* Loading placeholder */}
       {!loaded && (
         <div className="absolute inset-0 flex items-center justify-center" style={{ background: "#051A3D" }}>
           <div className="flex flex-col items-center gap-4">
@@ -109,7 +204,7 @@ export default function ServicesHero() {
         </div>
       )}
 
-      {/* ── Gradient overlays ── */}
+      {/* Gradient overlays */}
       <div className="absolute inset-0 pointer-events-none" style={{
         background: "linear-gradient(to bottom, rgba(5,26,61,0.85) 0%, rgba(5,26,61,0.3) 35%, rgba(5,26,61,0.3) 65%, rgba(5,26,61,1) 100%)"
       }} />
@@ -118,7 +213,7 @@ export default function ServicesHero() {
       }} />
       <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(0,0,0,0.45)" }} />
 
-      {/* ── CSS grid overlay ── */}
+      {/* CSS grid overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
@@ -128,7 +223,7 @@ export default function ServicesHero() {
         }}
       />
 
-      {/* ── HUD corner labels ── */}
+      {/* HUD corner labels */}
       <motion.div
         style={{ opacity: loaded ? 1 : 0 }}
         className="absolute inset-0 pointer-events-none z-10"
@@ -153,10 +248,9 @@ export default function ServicesHero() {
         <div className="absolute bottom-6 right-6 w-12 h-12 hidden md:block" style={{ borderBottom: "1.5px solid rgba(229,181,58,0.2)", borderRight: "1.5px solid rgba(229,181,58,0.2)" }} />
       </motion.div>
 
-      {/* ── Hero content ── */}
+      {/* Hero content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-20 pt-16">
-
-        {/* Pill badge */}
+        {/* Pulsing live dot/badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -248,7 +342,7 @@ export default function ServicesHero() {
         </motion.div>
       </div>
 
-      {/* ── Scroll indicator ── */}
+      {/* Scroll indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-20">
         <div className="w-px h-8 relative overflow-hidden" style={{ background: "rgba(255,255,255,0.08)" }}>
           <motion.div
@@ -261,4 +355,26 @@ export default function ServicesHero() {
       </div>
     </section>
   );
+}
+
+export default function ServicesHero() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="relative w-full bg-[#051A3D]" style={{ height: "60vh", minHeight: 480 }} />
+    );
+  }
+
+  if (isMobile) {
+    return <ServicesHeroMobile />;
+  }
+
+  return <ServicesHeroDesktop />;
 }

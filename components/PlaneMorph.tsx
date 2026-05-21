@@ -4,14 +4,38 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
-export default function PlaneMorph() {
+function PlaneMorphMobile() {
+  return (
+    <section className="relative bg-[#051A3D] h-screen">
+      <div className="relative h-screen w-full overflow-hidden">
+        {/* Static Background Image (Fully revealed morph frame) */}
+        <img
+          src="/sequence-2/0060.jpg"
+          alt="Trial Graphics Head/Brain Visualization"
+          className="absolute inset-0 h-full w-full object-cover opacity-60 filter brightness-[0.7]"
+        />
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-[#051A3D] via-transparent to-[#051A3D] pointer-events-none" />
+        <div className="absolute inset-0 bg-[#051A3D]/30 pointer-events-none" />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none z-15">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-widest text-white uppercase max-w-xl leading-tight">
+              Anatomy. Injury.<br/> Causation. Procedure.
+            </h2>
+            <p className="text-base sm:text-lg font-light tracking-wide text-white/60 max-w-md leading-relaxed mx-auto">
+              Every frame is designed to make complex evidence easier to understand.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PlaneMorphDesktop() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -20,7 +44,7 @@ export default function PlaneMorph() {
 
   const { images, loaded } = useImagePreloader({
     path: "/sequence-2",
-    frameCount: 120, // Adjust based on sequence-2
+    frameCount: 120,
     extension: "jpg",
   });
 
@@ -80,14 +104,6 @@ export default function PlaneMorph() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    if (isMobile) {
-      // Draw a fully-revealed high-quality frame statically on mobile (frame 60)
-      drawFrame(60);
-      return () => {
-        window.removeEventListener("resize", resizeCanvas);
-      };
-    }
-
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const frameIndex = Math.min(
         images.length - 1,
@@ -105,11 +121,12 @@ export default function PlaneMorph() {
       unsubscribe();
       cancelAnimationFrame(animationFrameId);
     };
-  }, [loaded, images, scrollYProgress, isMobile]);
+  }, [loaded, images, scrollYProgress]);
 
   return (
-    <section ref={sectionRef} className={`relative bg-[#051A3D] ${isMobile ? "h-screen" : "h-[400vh]"}`}>
-      <div className={`relative ${isMobile ? "" : "sticky top-0"} h-screen w-full overflow-hidden`}>
+    <section ref={sectionRef} className="relative bg-[#051A3D] h-[400vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Canvas morph visualization */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full object-cover"
@@ -129,40 +146,49 @@ export default function PlaneMorph() {
         )}
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none">
-          {!isMobile && (
-            <>
-              <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
-                <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
-                  Medical Visuals <br/> Built for Trial
-                </h2>
-              </motion.div>
+          <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+              Medical Visuals <br/> Built for Trial
+            </h2>
+          </motion.div>
 
-              <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
-                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
-                  Anatomy. Injury.<br/> Causation. Procedure.
-                </h2>
-              </motion.div>
+          <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+              Anatomy. Injury.<br/> Causation. Procedure.
+            </h2>
+          </motion.div>
 
-              <motion.div style={{ opacity: phase3Opacity, y: phase3Y }} className="absolute">
-                <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
-                  Every frame is designed to make complex evidence easier to understand.
-                </h2>
-              </motion.div>
-            </>
-          )}
-
-          {isMobile && (
-            <div className="flex flex-col gap-4">
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-widest text-white uppercase max-w-xl leading-tight">
-                Anatomy. Injury.<br/> Causation. Procedure.
-              </h2>
-              <p className="text-base sm:text-lg font-light tracking-wide text-white/60 max-w-md leading-relaxed mx-auto">
-                Every frame is designed to make complex evidence easier to understand.
-              </p>
-            </div>
-          )}
+          <motion.div style={{ opacity: phase3Opacity, y: phase3Y }} className="absolute">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
+              Every frame is designed to make complex evidence easier to understand.
+            </h2>
+          </motion.div>
         </div>
       </div>
     </section>
   );
+}
+
+export default function PlaneMorph() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="relative bg-[#051A3D] h-screen">
+        <div className="absolute inset-0 bg-[#051A3D]" />
+      </section>
+    );
+  }
+
+  if (isMobile) {
+    return <PlaneMorphMobile />;
+  }
+
+  return <PlaneMorphDesktop />;
 }
