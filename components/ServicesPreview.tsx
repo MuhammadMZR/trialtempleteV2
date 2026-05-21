@@ -38,9 +38,11 @@ function ServiceCard({
 
   // Dynamic pointer-events to prevent invisible off-screen cards from blocking clicks & hovers
   const pointerEvents = useTransform(scrollYProgress, (latest) => {
-    const hasEntered = index === 0 ? true : latest >= enterStart;
-    const hasExited = index === total - 1 ? false : latest >= exitEnd;
-    return hasEntered && !hasExited ? "auto" : "none";
+    const activeIndex = Math.min(
+      Math.max(Math.round(latest / step), 0),
+      total - 1
+    );
+    return index === activeIndex ? "auto" : "none";
   });
 
   const zIndex = index;
