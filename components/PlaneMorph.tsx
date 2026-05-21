@@ -1,12 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 export default function PlaneMorph() {
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -75,6 +80,14 @@ export default function PlaneMorph() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
+    if (isMobile) {
+      // Draw a fully-revealed high-quality frame statically on mobile (frame 60)
+      drawFrame(60);
+      return () => {
+        window.removeEventListener("resize", resizeCanvas);
+      };
+    }
+
     const unsubscribe = scrollYProgress.on("change", (latest) => {
       const frameIndex = Math.min(
         images.length - 1,
@@ -92,11 +105,11 @@ export default function PlaneMorph() {
       unsubscribe();
       cancelAnimationFrame(animationFrameId);
     };
-  }, [loaded, images, scrollYProgress]);
+  }, [loaded, images, scrollYProgress, isMobile]);
 
   return (
-    <section ref={sectionRef} className="relative h-[400vh] bg-[#051A3D]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+    <section ref={sectionRef} className={`relative bg-[#051A3D] ${isMobile ? "h-screen" : "h-[400vh]"}`}>
+      <div className={`relative ${isMobile ? "" : "sticky top-0"} h-screen w-full overflow-hidden`}>
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full object-cover"
@@ -116,23 +129,38 @@ export default function PlaneMorph() {
         )}
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none">
-          <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
-            <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
-              Medical Visuals <br/> Built for Trial
-            </h2>
-          </motion.div>
+          {!isMobile && (
+            <>
+              <motion.div style={{ opacity: phase1Opacity, y: phase1Y }} className="absolute">
+                <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+                  Medical Visuals <br/> Built for Trial
+                </h2>
+              </motion.div>
 
-          <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
-              Anatomy. Injury.<br/> Causation. Procedure.
-            </h2>
-          </motion.div>
+              <motion.div style={{ opacity: phase2Opacity, y: phase2Y }} className="absolute">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-widest text-white uppercase max-w-4xl leading-tight">
+                  Anatomy. Injury.<br/> Causation. Procedure.
+                </h2>
+              </motion.div>
 
-          <motion.div style={{ opacity: phase3Opacity, y: phase3Y }} className="absolute">
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
-              Every frame is designed to make complex evidence easier to understand.
-            </h2>
-          </motion.div>
+              <motion.div style={{ opacity: phase3Opacity, y: phase3Y }} className="absolute">
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-light tracking-wide text-muted max-w-3xl leading-relaxed">
+                  Every frame is designed to make complex evidence easier to understand.
+                </h2>
+              </motion.div>
+            </>
+          )}
+
+          {isMobile && (
+            <div className="flex flex-col gap-4">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-widest text-white uppercase max-w-xl leading-tight">
+                Anatomy. Injury.<br/> Causation. Procedure.
+              </h2>
+              <p className="text-base sm:text-lg font-light tracking-wide text-white/60 max-w-md leading-relaxed mx-auto">
+                Every frame is designed to make complex evidence easier to understand.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </section>

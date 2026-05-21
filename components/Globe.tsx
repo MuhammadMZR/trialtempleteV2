@@ -15,14 +15,14 @@ export default function Globe() {
   return (
     <section className="relative min-h-screen bg-[#051A3D] overflow-hidden py-16 md:py-32">
       {/* Background Video */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-[#051A3D]">
         <video
           src="/globe-loop.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover opacity-40 hidden md:block"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#051A3D] via-[#051A3D]/40 to-[#051A3D]" />
       </div>
