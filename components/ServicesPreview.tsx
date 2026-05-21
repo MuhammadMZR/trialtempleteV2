@@ -36,6 +36,13 @@ function ServiceCard({
   const overlayOpacityOutput = [0, 0.8];
   const overlayOpacity = useTransform(scrollYProgress, scaleRange, overlayOpacityOutput);
 
+  // Dynamic pointer-events to prevent invisible off-screen cards from blocking clicks & hovers
+  const pointerEvents = useTransform(scrollYProgress, (latest) => {
+    const hasEntered = index === 0 ? true : latest >= enterStart;
+    const hasExited = index === total - 1 ? false : latest >= exitEnd;
+    return hasEntered && !hasExited ? "auto" : "none";
+  });
+
   const zIndex = index;
 
   return (
@@ -44,6 +51,7 @@ function ServiceCard({
         x,
         scale,
         zIndex,
+        pointerEvents,
         position: "absolute",
         top: 0,
         left: 0,
